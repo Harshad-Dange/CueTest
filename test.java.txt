@@ -15,7 +15,7 @@ import com.zimplistic.rotimatic.commonautomationframework.CustomLogger;
 import com.zimplistic.rotimatic.constants.MqttConstants;
 import com.zimplistic.rotimatic.remote.models.MqttTopicsHelper;
 import com.zimplistic.rotimatic.remote.models.RTRemoteUtils;
-
+// This is test
 public class MQTTConnect {
 
 	private static final String TAG = MQTTConnect.class.getSimpleName();
