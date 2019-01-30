@@ -21,7 +21,6 @@ public class AutomationLog
         LogFormatter formatter = new LogFormatter();
         ConsoleHandler handler = new ConsoleHandler();
         handler.setFormatter(formatter);
- 
         logger.addHandler(handler);
         
         ////////////// Adding Log File /////////////////

@@ -9,7 +9,7 @@ public class Configuration
     private Properties properties = new Properties();
     private static Configuration globalConfiguration = null;
     
-    private final static String DEFAULT_CONFIG_PATH = "src/configuration/config.properties";
+    private final static String DEFAULT_CONFIG_PATH = System.getProperty("user.dir")+"/src/main/java/com/configurations/config.properties";
 
     protected Configuration()
     {
@@ -51,8 +51,8 @@ public class Configuration
 
     private String readConfigurationProperty(String propertyName) 
     {
-        String defaultValue = "";
-        return properties.getProperty(propertyName, defaultValue);
+//        String defaultValue = "";
+        return properties.getProperty(propertyName);
     }
 
     public static String getConfigurationValueForProperty(String propertyName)

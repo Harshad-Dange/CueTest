@@ -1,29 +1,46 @@
 package com.Runner;
 
-import java.io.File;
-
 import org.junit.runner.RunWith;
-
+import com.Utility.AutomationLog;
 import com.Utility.baseClass;
-import com.cucumber.listener.ExtentProperties;
-import com.cucumber.listener.Reporter;
+
 import cucumber.api.CucumberOptions;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
-import cucumber.api.junit.Cucumber;
+
 	
+	@ExtendedCucumberOptions(
+		jsonReport = "target/cucumber.json",
+		retryCount = 3,
+		detailedReport = true,
+		detailedAggregatedReport = true,
+		overviewReport = true,
+		toPDF = true,
+		outputFolder = "target"
+		)
 	@CucumberOptions(
 			features="Features",	
 			plugin = { "pretty", "html:target/site/cucumber-pretty", "json:target/cucumber.json","junit:target/cucumber.xml",
-					 "com.cucumber.listener.ExtentCucumberFormatter:"},
-			glue= {"stepDefination"},
+		/* "com.cucumber.listener.ExtentCucumberFormatter:" */},
+			glue= {"com.StepDefination"},
 			monochrome = true
 			
 			)
-	@RunWith(Cucumber.class)
-	public class Runner  {
-	@Before
-		public void before() {
+	@RunWith(ExtendedCucumberRunner.class)
+	public class Runner  extends baseClass{
+	
+		 @BeforeSuite
+		    public static void setUp() {
+//			 com.Utility.AutomationLog.info("");
+			 baseClass.createReportFolder();
+			 System.out.println("this is before suite");
+			 AutomationLog.info("In Before Suite");
+		    }
+		 
+		 @AfterSuite
+		 	public static void after() {
+			 
+		 }
+		/*
+		@Beforepublic void before() {
 		baseClass.createReportFolder();
 		ExtentProperties extentProperties=ExtentProperties.INSTANCE;
 		extentProperties.setReportPath(baseClass.path+"/AutomationResult.html");
@@ -44,7 +61,7 @@ import cucumber.api.junit.Cucumber;
 //			reports.flush();
 		}
 
-		
+		*/
 	}
 
 
