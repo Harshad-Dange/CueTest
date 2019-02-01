@@ -1,19 +1,21 @@
-package com.Runner;
-
-public @interface ExtendedCucumberOptions {
-
-	String jsonReport();
-
-	int retryCount();
-
-	boolean detailedReport();
-
-	boolean detailedAggregatedReport();
-
-	boolean overviewReport();
-
-	boolean toPDF();
-
-	String outputFolder();
-
-}
+/*
+ * package com.Runner;
+ * 
+ * public @interface ExtendedCucumberOptions {
+ * 
+ * String jsonReport();
+ * 
+ * int retryCount();
+ * 
+ * boolean detailedReport();
+ * 
+ * boolean detailedAggregatedReport();
+ * 
+ * boolean overviewReport();
+ * 
+ * boolean toPDF();
+ * 
+ * String outputFolder();
+ * 
+ * }
+ */

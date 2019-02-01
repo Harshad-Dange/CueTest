@@ -15,6 +15,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+
+import com.CommonFunctions.ObjectManager;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 
@@ -24,16 +28,19 @@ import io.github.bonigarcia.wdm.WebDriverManager;
  */
 public class baseClass {
 	
-	public static WebDriver driver;
+	public static WebDriver driver=null;
 	public static Properties properties=new Properties();
 	InputStream input;
 	
 	public static final String reportDirectory = new File(System.getProperty("user.dir")) + "/Reports/";
-	public static final String DEFAULT_CONFIG_PATH="src/main/java/configurations/config.properties";
+	public static final String DEFAULT_CONFIG_PATH="src/main/java/com/configurations/config.properties";
 	public static String path;
+	ObjectManager objManager=new ObjectManager(driver);
+//	public static AutomationLogs log = AutomationLogs.getAutomationLog();
 	
-	
-	public baseClass() {		 
+	public baseClass() {	
+		
+		
 		 try {
 //				input=getClass().getClassLoader().getResourceAsStream("");
 				input=new FileInputStream(DEFAULT_CONFIG_PATH);
@@ -56,29 +63,55 @@ public class baseClass {
 		
 		String browser=properties.getProperty("browser");
 		
-		if(browser.equals("Chrome")) {
+		
+		objManager.getBrowserDetails().setBrowserName(browser);
+		
+		if(properties.getProperty("executionType").equals("Single")){
 			
-			WebDriverManager.chromedriver().setup(); 
-//			System.setProperty("webdriver.chrome.driver", properties.getProperty("ChromePath"));
-			driver=new ChromeDriver();
-		}
-		 
-		else if(browser.equals("MFF")) {
+		
+			switch (objManager.getBrowserDetails().getBrowserName()) {
+			case "chrome":
+//				System.setProperty("webdriver.chrome.driver", "Binaries/chromedriver.exe");
+				WebDriverManager.chromedriver().setup();
+				driver = new ChromeDriver();
+				driver.manage().window().maximize();
+				break;
 			
-			System.setProperty("webdriver.chrome.driver", properties.getProperty("GechodriverPath"));
-			driver=new FirefoxDriver();
+			case "internetExplorer":
+//				System.setProperty("webdriver.ie.driver", "Binaries/IEDriverServer.exe");
+				WebDriverManager.iedriver().setup();
+				driver = new InternetExplorerDriver();
+				driver.manage().window().maximize();
+				break;
+				
+			case "firefox":
+//				System.setProperty("webdriver.gecko.driver", "Binaries/geckodriver.exe");
+				WebDriverManager.firefoxdriver().setup();
+				driver = new FirefoxDriver();
+				driver.manage().window().maximize();
+				break;
+
+			default:
+//				System.setProperty("webdriver.chrome.driver", "Binaries/chromedriver.exe");
+				WebDriverManager.chromedriver().setup();
+				driver = new ChromeDriver();
+				driver.manage().window().maximize();
+				break;
+			}
 		}
+		
 	}
 	
-	public String getUrl() {
+	public static String getUrl() {
 		return properties.getProperty("url");		
 	}
 	
-	public  String getUsername() {
+	public  static String getUsername() {
+		System.out.println(properties.getProperty("username"));
 		return properties.getProperty("username");
 	}
 	
-	public String getPassword() {
+	public static String getPassword() {
 		return properties.getProperty("password");
 	}
 	

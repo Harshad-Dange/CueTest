@@ -1,43 +1,51 @@
 package com.Runner;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
-import com.Utility.AutomationLog;
+import org.openqa.selenium.WebDriver;
+
 import com.Utility.baseClass;
-
 import cucumber.api.CucumberOptions;
-
+import cucumber.api.junit.Cucumber;
 	
-	@ExtendedCucumberOptions(
-		jsonReport = "target/cucumber.json",
-		retryCount = 3,
-		detailedReport = true,
-		detailedAggregatedReport = true,
-		overviewReport = true,
-		toPDF = true,
-		outputFolder = "target"
-		)
+/*@ExtendedCucumberOptions(
+	jsonReport = "target/cucumber.json",
+	retryCount = 0,
+	detailedReport = true,
+	detailedAggregatedReport = true,
+	overviewReport = true,
+	toPDF = true,
+	outputFolder = "target"
+	)*/
+	@RunWith(Cucumber.class)
 	@CucumberOptions(
 			features="Features",	
-			plugin = { "pretty", "html:target/site/cucumber-pretty", "json:target/cucumber.json","junit:target/cucumber.xml",
-		/* "com.cucumber.listener.ExtentCucumberFormatter:" */},
+			plugin = { 	"pretty", 
+						"html:target/site/cucumber-pretty",
+						"json:target/cucumber.json",
+						"junit:target/cucumber.xml",
+					/*  "com.cucumber.listener.ExtentCucumberFormatter:" */
+						},
 			glue= {"com.StepDefination"},
 			monochrome = true
 			
 			)
-	@RunWith(ExtendedCucumberRunner.class)
+//	@RunWith(ExtendedCucumberOptions.class)
 	public class Runner  extends baseClass{
-	
-		 @BeforeSuite
-		    public static void setUp() {
-//			 com.Utility.AutomationLog.info("");
-			 baseClass.createReportFolder();
-			 System.out.println("this is before suite");
-			 AutomationLog.info("In Before Suite");
-		    }
-		 
-		 @AfterSuite
-		 	public static void after() {
-			 
+//		static baseClass base=new baseClass();
+		@BeforeClass
+		public static void beforeTest() {
+			System.out.println("test case is about start execution");
+			baseClass.createReportFolder();
+						
+		}
+		
+
+		 @AfterClass
+		 public static void tearDown() {
+//			 base.takescreenshot("TestMethod");
+			 driver.close();
 		 }
 		/*
 		@Beforepublic void before() {

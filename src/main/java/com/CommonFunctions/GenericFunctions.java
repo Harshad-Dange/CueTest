@@ -6,20 +6,33 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.Utility.baseClass;
 
 /**
  * @author Harshad
  *
  */
-public class GenericFunctions {
+public class GenericFunctions extends baseClass{
+	
 	private static Actions action;
-	GenericFunctions(WebDriver driver){
-		
-		action=new Actions(driver);
-		
-	}	
 
+	/*
+	 * GenericFunctions(WebDriver driver){
+	 * 
+	 * this.driver=driver;
+	 * 
+	 * }
+	 */
+	public WebElement waitElementToBeClicable(WebElement element) {
+		
+		WebDriverWait wait=new WebDriverWait(driver, 10);
+		return wait.until(ExpectedConditions.elementToBeClickable(element));
+		
+	}
 	public static Select selectByIndex(WebElement element, int index){
 		Select sel=new Select(element);
 		sel.selectByIndex(index);

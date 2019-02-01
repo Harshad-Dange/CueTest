@@ -1,17 +1,32 @@
 package com.StepDefination;
 
-import com.Utility.AutomationLog;
-
+import com.Utility.baseClass;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
-public class LogintoLucency {
+
+public class LogintoLucency extends baseClass{
 	
+//	ObjectManager objManager=new ObjectManager(driver);
+//	 AutomationLogs log=new AutomationLogs();
+
 	
-	@Given("^User should navigate to login page and login to application$")
+	/*
+	 * public LogintoLucency(){
+	 * 
+	 * log = AutomationLogs.getAutomationLog();
+	 * 
+	 * }
+	 */
+	 
+	 @Given("^User should navigate to login page and login to application$")
 	public void Login_to_Application(){
-		AutomationLog.info("This is login method");
-		System.out.println("This is login method");
+		
+//		driver.get(Configuration.getConfigurationValueForProperty("url"));
+		
+		driver.get(baseClass.getUrl());
+		
+//		AutomationLogs.info("This is given method");
 		
 	}
 	
